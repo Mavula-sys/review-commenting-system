@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Review System</title>              
+    </head>
+    <body> 
+        CommentId:<input type="text" placeholder="Enter CommentId" id="commentid"><br><br>
+        Username:<input type="text" id="uname" placeholder="Enter Username"><br><br>
+        Comment:<textarea id="comment"></textarea><br><br>
+        <button onclick="addComment()">Add Comment</button><br><br>
+
+
+        <ul id="comments">                                                                                         
+                               
+        </ul>                          
+
+            <script>
+            var allComments = [];//All the comments we enter in the fields stores in this array.
+            function addComment(){    
+            
+            var username =document.getElementById('uname').value
+            var comment  = document.getElementById('comment').value
+            var commentid = document.getElementById('commentid').value
+
+            var comment = {
+                username:username,
+                comment:comment,
+                commentid:commentid,
+                time:getCurrentDate()
+
+            }
+                
+            console.log(comment);
+            allComments.push(comment);//This will push the comments in to allcomments array.
+            showComments();
+            emptyFields();
+            }
+
+            //This function will empty username,comment and commentid fields after clicking the button.
+            function emptyFields(){
+                document.getElementById('uname').value=" ";
+                document.getElementById('comment').value=" ";
+                document.getElementById('commentid').value=" ";
+                
+
+            }
+            //This function will display the present date and time for comments.
+            function getCurrentDate(){
+                var date = new Date();
+                return date.getHours()+ " " +date.getMinutes()+ " " + date.getDate()+ " / " + date.getMonth()+ " / "  + date.getFullYear();
+
+            }
+            //This function will display the comments in unorder list.
+            function showComments(){
+                var comments=document.getElementById('comments');
+                comments.innerHTML=" ";
+                for(var i=0;i<allComments.length;i++){
+                    var comment = allComments[i];
+                    comments.innerHTML = comments.innerHTML + "<li>" + comment.username + " " + comment.comment + "</li>";
+
+                }   
+                }
+            </script>                            
+    </body>
+</html>
